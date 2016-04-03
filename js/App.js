@@ -1,52 +1,70 @@
 import React, { Component } from 'react';
-import Button from './components/Button';
-
+import SearchBar from './components/SearchBar';
+import UserList from './components/UserList';
+import ToolBar from './components/ToolBar';
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      phrase: 'Нажми на кнопку!',
-      count: 0
-    };
-  }
+	constructor(props) {
+		super(props);
 
-  updateBtn() {
-    const phrases = [
-      'ЖМИ!', 'Не останавливайся!',
-      'У тебя хорошо получается!', 'Красавчик!',
-      'Вот это и есть React!', 'Продолжай!',
-      'Пока ты тут нажимаешь кнопку другие работают!',
-      'Всё хватит!', 'Ну и зачем ты нажал?',
-      'В следующий раз тут будет полезный совет',
-      'Чего ты ждешь от этой кнопки?',
-      'Если дойдёшь до тысячи, то сразу научищься реакту',
-      'ой, всё!', 'Ты нажал кнопку столько раз, что обязан на ней жениться',
-      'У нас было 2 npm-пакета с реактом, 75 зависимостей от сторонних библиотек, '
-      + '5 npm-скриптов и целое множество плагинов галпа всех сортов и расцветок, '
-      + 'а также redux, jquery, mocha, пачка плагинов для eslint и ингерация с firebase. '
-      + 'Не то что бы это был необходимый набор для фронтенда. Но если начал собирать '
-      + 'вебпаком, становится трудно остановиться. Единственное, что вызывало у меня '
-      + 'опасения - это jquery. Нет ничего более беспомощного, безответственного и испорченного, '
-      + 'чем рядовой верстальщик без jquery. Я знал, что рано или поздно мы перейдем и на эту дрянь.',
-      'coub про кота-джедая: http://coub.com/view/spxn',
-      'Дальнобойщики на дороге ярости: http://coub.com/view/6h0dy',
-      'Реакция коллег на ваш код: http://coub.com/view/5rjjw',
-      'Енот ворует еду: http://coub.com/view/xi3cio',
-      'Российский дизайн: http://coub.com/view/16adw5i0'
-    ];
-    this.setState({
-      count: this.state.count + 1,
-      phrase: phrases[parseInt(Math.random() * phrases.length)]
-    });
-  }
+		this.state = {
+			users: []
+		};
 
-  render() {
-    return (
-      <div className="container app">
-        <Button count={this.state.count} update={this.updateBtn.bind(this)} />
-        <p style={{marginTop: 2 + 'rem'}}>{this.state.phrase}</p>
-      </div>
-    );
-  }
+		this._loadData();
+	}
+
+	_loadData() {
+		let xhr = new XMLHttpRequest();
+		xhr.open('GET', 'data.json');
+
+		xhr.onload = () => {
+		    if (xhr.status === 200) {
+		    	let users = JSON.parse(xhr.response);
+		    	this.setState({ users });
+		    	this._users = users;
+		    }
+		}
+
+		xhr.onerror = () => {
+		    console.error('Data loading error');
+		}
+
+		xhr.send();
+	}
+
+	updateUsers(query) {
+		if (query) {
+			var filteredData = this._users.filter(el => el.name.toLowerCase().includes(query));
+		}
+		
+		this.setState({ users: query ? filteredData : this._users });
+	}
+
+	sortUsers(key, order) {
+		console.log('sortUsers', key, order);
+
+		let users = this.state.users.sort((a, b) => {
+			switch (key) {
+				case 'name':
+					return order ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+				case 'age':
+					return order ? a.age - b.age : b.age - a.age;
+			}
+		});
+
+		this.setState({ users });
+	}
+
+	render() {
+		return (
+			<div className="container app">
+				<SearchBar onChange={this.updateUsers.bind(this)} />
+
+				<ToolBar onSort={this.sortUsers.bind(this)} />
+
+				<UserList users={this.state.users} />
+			</div>
+		);
+	}
 }
