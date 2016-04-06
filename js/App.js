@@ -8,7 +8,8 @@ export default class App extends Component {
 		super(props);
 
 		this.state = {
-			users: []
+			users: [],
+			searchQuery: ''
 		};
 
 		this._loadData();
@@ -38,7 +39,10 @@ export default class App extends Component {
 			var filteredData = this._users.filter(el => el.name.toLowerCase().includes(query));
 		}
 		
-		this.setState({ users: query ? filteredData : this._users });
+		this.setState({
+			users: query ? filteredData : this._users,
+			searchQuery: query
+		});
 	}
 
 	sortUsers(key, order) {
@@ -63,7 +67,7 @@ export default class App extends Component {
 
 				<ToolBar onSort={this.sortUsers.bind(this)} />
 
-				<UserList users={this.state.users} />
+				<UserList users={this.state.users} mark={this.state.searchQuery} />
 			</div>
 		);
 	}

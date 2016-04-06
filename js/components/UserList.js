@@ -19,6 +19,7 @@ class UserList extends Component {
 
 		render() {
 			let users = this.props.users;
+			let mark = this.props.mark;
 
 			return (
 				<div className="row">
@@ -38,7 +39,7 @@ class UserList extends Component {
 									</tr>
 								</thead>
 								<tbody>
-									{users.map((u, i) => <UserData key={i} user={u} onSelected={this.onSelected.bind(this)} />)}
+									{users.map((u, i) => <UserData key={i} user={u} mark={mark} onSelected={this.onSelected.bind(this)} />)}
 								</tbody>
 							</table>
 						</div>
