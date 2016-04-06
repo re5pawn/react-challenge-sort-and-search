@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import SortByName from './SortByName';
-import SortByAge from './SortByAge';
 
-class ToolBar extends Component {
+class SortByAge extends Component {
 		constructor(props) {
 			super(props);
 
@@ -25,16 +23,11 @@ class ToolBar extends Component {
 
 		render() {
 			return (
-				<div className="row">
-					<div className="col-md-12">
-						<div className="pull-right">
-							<SortByName onSort={this.props.onSort.bind(this)} />
-							<SortByAge onSort={this.props.onSort.bind(this)} />
-						</div>
-					</div>
-				</div>
+				<button className="btn btn-info btn-sm" type="button" onClick={this.handleClick.bind(this, 'age')}>
+						<i className={this._concatClassNames( 'glyphicon-sort-by-order', 'glyphicon')}></i> Sort by age
+				</button>
 			);
 		}
 }
 
-export default ToolBar;
+export default SortByAge;
