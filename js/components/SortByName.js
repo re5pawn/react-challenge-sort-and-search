@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as Utils from '../utils';
 
 class SortByName extends Component {
 		constructor(props) {
@@ -12,11 +13,6 @@ class SortByName extends Component {
 			this.props.onSort && this.props.onSort(key, this.order);
 		}
 
-		_concatClassNames(addClassName, ...classNames) {
-			addClassName = this._getOptClassName(addClassName);
-			return classNames.concat(addClassName).join(' ');
-		}
-
 		_getOptClassName(className) {
 			return !this.order ? className : `${className}-alt`;
 		}
@@ -24,7 +20,7 @@ class SortByName extends Component {
 		render() {
 			return (
 				<button className="btn btn-info btn-sm" type="button" onClick={this.handleClick.bind(this, 'name')}>
-						<i className={this._concatClassNames( 'glyphicon-sort-by-alphabet', 'glyphicon')}></i> Sort by name
+						<i className={Utils.concatClassNames(this._getOptClassName('glyphicon-sort-by-alphabet'), 'glyphicon')}></i> Sort by name
 				</button>
 			);
 		}

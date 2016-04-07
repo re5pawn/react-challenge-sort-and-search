@@ -46,8 +46,6 @@ export default class App extends Component {
 	}
 
 	sortUsers(key, order) {
-		console.log('sortUsers', key, order);
-
 		let users = this.state.users.sort((a, b) => {
 			switch (key) {
 				case 'name':
