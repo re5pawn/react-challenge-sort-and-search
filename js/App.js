@@ -36,7 +36,7 @@ export default class App extends Component {
 
 	updateUsers(query) {
 		if (query) {
-			var filteredData = this._users.filter(el => el.name.toLowerCase().includes(query));
+			var filteredData = this._users.filter(el => el.name.toLowerCase().indexOf(query) >= 0);
 		}
 		
 		this.setState({
