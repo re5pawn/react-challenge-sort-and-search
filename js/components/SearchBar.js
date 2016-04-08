@@ -30,7 +30,8 @@ class SearchBar extends Component {
 						<div style={{position: 'relative'}}>
 							<input type="text" className="form-control" placeholder="Search by name..."
 							ref="searchField" onChange={this.handleChange.bind(this)} />
-							<button type="button" className="close" style={fieldCleanerStyles} onClick={this.cleanField.bind(this)}>
+							<button type="button" className="close" style={fieldCleanerStyles}
+								onClick={this.cleanField.bind(this)}>
 								&times;
 							</button>
 						</div>
