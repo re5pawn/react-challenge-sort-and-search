@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as Utils from '../utils';
 
 class UserData extends Component {
 		constructor(props) {
@@ -13,10 +14,6 @@ class UserData extends Component {
 			//return this.props.user.id !== nextProps.user.id;
 
 			return true;
-		}
-
-		_getUserImage(imgName) {
-			return `./images/${imgName}.svg`;
 		}
 
 		_getMarkedName(name, mark) {
@@ -36,7 +33,7 @@ class UserData extends Component {
 
 			return (
 				<tr className="user-data-item" onClick={this.handleClick.bind(this, user)}>
-					<td><img src={this._getUserImage(user.image)} alt="User Image" className="user-image" /></td>
+					<td><img src={Utils.getUserImage(user.image)} alt="User Image" className="user-image" /></td>
 					<td>{this._getMarkedName(user.name, mark)}</td>
 					<td>{user.age}</td>
 					<td>{user.phone}</td>

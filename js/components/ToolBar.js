@@ -9,20 +9,6 @@ class ToolBar extends Component {
 			this.order = false;
 		}
 
-		handleClick(key) {
-			this.order = !this.order;
-			this.props.onSort && this.props.onSort(key, this.order);
-		}
-
-		_concatClassNames(addClassName, ...classNames) {
-			addClassName = this._getOptClassName(addClassName);
-			return classNames.concat(addClassName).join(' ');
-		}
-
-		_getOptClassName(className) {
-			return !this.order ? className : `${className}-alt`;
-		}
-
 		render() {
 			return (
 				<div className="row">
