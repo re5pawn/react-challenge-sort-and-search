@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 class SearchBar extends Component {
 		constructor(props) {
 			super(props);
+
+			this.handleChange = this.handleChange.bind(this);
+			this.cleanField = this.cleanField.bind(this);
+		}
+
+		componentDidMount() {
+			ReactDOM.findDOMNode(this.refs.searchField).autofocus = true;
 		}
 
 		handleChange(event) {
@@ -29,9 +37,9 @@ class SearchBar extends Component {
 					<div className="col-md-12">
 						<div style={{position: 'relative'}}>
 							<input type="text" className="form-control" placeholder="Search by name..."
-							ref="searchField" onChange={this.handleChange.bind(this)} />
+							ref="searchField" onChange={this.handleChange} />
 							<button type="button" className="close" style={fieldCleanerStyles}
-								onClick={this.cleanField.bind(this)}>
+								onClick={this.cleanField}>
 								&times;
 							</button>
 						</div>
