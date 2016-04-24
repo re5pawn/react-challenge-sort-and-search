@@ -14,13 +14,15 @@ class SearchBar extends Component {
 		}
 
 		handleChange(event) {
-			let query = event.target.value.trim().toLowerCase();
-			this.props.onChange && this.props.onChange(query);
+			let searchQuery = event.target.value.trim().toLowerCase();
+			let data = this.props.data.filter(el => el.name.toLowerCase().indexOf(searchQuery) >= 0);
+
+			this.props.onChange && this.props.onChange({ data, searchQuery });
 		}
 
 		cleanField() {
 			this.refs.searchField.value = '';
-			this.props.onChange && this.props.onChange('');
+			this.props.onChange && this.props.onChange({ data: this.props.data, searchQuery: '' });
 		}
 
 		render() {

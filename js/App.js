@@ -8,9 +8,11 @@ export default class App extends Component {
 		super(props);
 
 		this.state = {
-			users: [],
+			data: [],
 			searchQuery: ''
 		};
+
+		this.updateState = this.updateState.bind(this);
 
 		this._loadData();
 	}
@@ -21,9 +23,8 @@ export default class App extends Component {
 
 		xhr.onload = () => {
 		    if (xhr.status === 200) {
-		    	let users = JSON.parse(xhr.response);
-		    	this.setState({ users });
-		    	this._users = users;
+		    	this.initialUsers = JSON.parse(xhr.response);
+		    	this.setState({data: this.initialUsers});
 		    }
 		}
 
@@ -34,19 +35,12 @@ export default class App extends Component {
 		xhr.send();
 	}
 
-	updateUsers(query) {
-		if (query) {
-			var filteredData = this._users.filter(el => el.name.toLowerCase().indexOf(query) >= 0);
-		};
-
-		this.setState({
-			users: query ? filteredData : this._users,
-			searchQuery: query
-		});
+	updateState(nextState) {
+		this.setState(nextState);
 	}
 
 	sortUsers(key, order) {
-		let users = this.state.users.sort((a, b) => {
+		let users = this.state.data.sort((a, b) => {
 			switch (key) {
 				case 'name':
 					return order ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
@@ -55,17 +49,17 @@ export default class App extends Component {
 			}
 		});
 
-		this.setState({ users });
+		this.setState({ data: users });
 	}
 
 	render() {
 		return (
 			<div className="container app">
-				<SearchBar onChange={this.updateUsers.bind(this)} />
+				<SearchBar data={this.initialUsers} onChange={this.updateState.bind(this)} />
 
 				<ToolBar onSort={this.sortUsers.bind(this)} />
 
-				<UserList users={this.state.users} mark={this.state.searchQuery} />
+				<UserList users={this.state.data} mark={this.state.searchQuery} />
 			</div>
 		);
 	}
