@@ -19,7 +19,7 @@ export default class App extends Component {
 
 	_loadData() {
 		let xhr = new XMLHttpRequest();
-		xhr.open('GET', 'data.json');
+		xhr.open('GET', this.props.data);
 
 		xhr.onload = () => {
 		    if (xhr.status === 200) {
@@ -39,7 +39,7 @@ export default class App extends Component {
 		this.setState(nextState);
 	}
 
-	sortUsers(key, order) {
+	sortData(key, order) {
 		let users = this.state.data.sort((a, b) => {
 			switch (key) {
 				case 'name':
@@ -55,11 +55,11 @@ export default class App extends Component {
 	render() {
 		return (
 			<div className="container app">
-				<SearchBar data={this.initialUsers} onChange={this.updateState.bind(this)} />
+				<SearchBar data={this.initialUsers} onSearch={this.updateState.bind(this)} />
 
-				<ToolBar onSort={this.sortUsers.bind(this)} />
+				<ToolBar onSort={this.sortData.bind(this)} />
 
-				<UserList users={this.state.data} mark={this.state.searchQuery} />
+				<UserList users={this.state.data} toMark={this.state.searchQuery} />
 			</div>
 		);
 	}

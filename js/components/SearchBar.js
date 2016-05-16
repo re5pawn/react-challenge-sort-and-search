@@ -17,12 +17,12 @@ class SearchBar extends Component {
 			let searchQuery = event.target.value.trim().toLowerCase();
 			let data = this.props.data.filter(el => el.name.toLowerCase().indexOf(searchQuery) >= 0);
 
-			this.props.onChange && this.props.onChange({ data, searchQuery });
+			this.props.onSearch && this.props.onSearch({ data, searchQuery });
 		}
 
 		cleanField() {
 			this.refs.searchField.value = '';
-			this.props.onChange && this.props.onChange({ data: this.props.data, searchQuery: '' });
+			this.props.onSearch && this.props.onSearch({ data: this.props.data, searchQuery: '' });
 		}
 
 		render() {
@@ -31,7 +31,8 @@ class SearchBar extends Component {
 				top: 0,
 				right: 0,
 				padding: '8px 16px',
-				color: '#2B3E50'
+				color: '#2B3E50',
+				outline: 'none'
 			};
 
 			return (

@@ -18,9 +18,6 @@ class UserList extends Component {
 		}
 
 		render() {
-			let users = this.props.users;
-			let mark = this.props.mark;
-
 			return (
 				<div className="row">
 					<div className="col-md-3">
@@ -39,7 +36,9 @@ class UserList extends Component {
 									</tr>
 								</thead>
 								<tbody>
-									{users.map((u, i) => <UserData key={i} user={u} mark={mark} onSelected={this.onSelected.bind(this)} />)}
+									{this.props.users.map((u, i) => {
+										return <UserData key={u.id} user={u} toMark={this.props.toMark} onSelected={this.onSelected.bind(this)} />;
+									})}
 								</tbody>
 							</table>
 						</div>
