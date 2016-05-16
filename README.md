@@ -4,4 +4,4 @@
 
 [Демо приложения](http://rtivital.github.io/react-challenge-sort-and-search-solution/)
 
-[Мой результат](http://re5pawn.github.io/react-challenge-sort-and-search/)
+[Получившийся результат](http://re5pawn.github.io/react-challenge-sort-and-search/)
