@@ -14,5 +14,5 @@ register(gulp, plugins, config)([
   'deploy'
 ]);
 
-gulp.task('build', gulp.parallel('build-js', 'build-scss', 'copy'));
-gulp.task('default', gulp.series('build', gulp.parallel('watch', 'serve')));
+gulp.task('build', ['build-js', 'build-scss', 'copy']);
+gulp.task('default', ['watch', 'serve']);
