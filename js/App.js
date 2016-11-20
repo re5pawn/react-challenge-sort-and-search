@@ -3,14 +3,17 @@ import SearchBar from './components/SearchBar';
 import UserList from './components/UserList';
 import ToolBar from './components/ToolBar';
 
-export default class App extends Component {
+import { actions } from './appReducer';
+import { connect } from 'react-redux';
+
+class App extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
+		/*this.state = {
 			data: [],
 			searchQuery: ''
-		};
+		};*/
 
 		this.updateState = this.updateState.bind(this);
 
@@ -19,12 +22,13 @@ export default class App extends Component {
 
 	_loadData() {
 		let xhr = new XMLHttpRequest();
-		xhr.open('GET', this.props.data);
+		xhr.open('GET', this.props.dataUrl);
 
 		xhr.onload = () => {
 		    if (xhr.status === 200) {
 		    	this.initialUsers = JSON.parse(xhr.response);
-		    	this.setState({data: this.initialUsers});
+		    	this.props.onDataLoaded(this.initialUsers);
+		    	//this.setState({data: this.initialUsers});
 		    }
 		}
 
@@ -59,8 +63,28 @@ export default class App extends Component {
 
 				<ToolBar onSort={this.sortData.bind(this)} />
 
-				<UserList users={this.state.data} toMark={this.state.searchQuery} />
+				<UserList users={this.props.data} toMark={this.props.searchQuery} />
 			</div>
 		);
 	}
 }
+
+const mapStateToProps = (state) => {
+  return {
+    data: state.data || [],
+    searchQuery: ''
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDataLoaded: (data) => {
+      dispatch({ type: actions.DATA_LOADED, data });
+    }
+  }
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(App);
