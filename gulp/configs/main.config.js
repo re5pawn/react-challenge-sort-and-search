@@ -5,7 +5,8 @@ module.exports = {
     js: './js/**/*.js',
     html: './*.html',
     dist: './public',
-    images: './images/**/*'
+    images: './images/**/*',
+    data: './data.json'
   },
   output: {
     js: 'js',
