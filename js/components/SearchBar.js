@@ -15,14 +15,12 @@ class SearchBar extends Component {
 
 		handleChange(event) {
 			let searchQuery = event.target.value.trim().toLowerCase();
-			let data = this.props.data.filter(el => el.name.toLowerCase().indexOf(searchQuery) >= 0);
-
-			this.props.onSearch && this.props.onSearch({ data, searchQuery });
+			this.props.onSearch && this.props.onSearch(searchQuery);
 		}
 
 		cleanField() {
 			this.refs.searchField.value = '';
-			this.props.onSearch && this.props.onSearch({ data: this.props.data, searchQuery: '' });
+			this.props.onSearch && this.props.onSearch('');
 		}
 
 		render() {

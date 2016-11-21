@@ -10,13 +10,6 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 
-		/*this.state = {
-			data: [],
-			searchQuery: ''
-		};*/
-
-		this.updateState = this.updateState.bind(this);
-
 		this._loadData();
 	}
 
@@ -28,7 +21,6 @@ class App extends Component {
 		    if (xhr.status === 200) {
 		    	this.initialUsers = JSON.parse(xhr.response);
 		    	this.props.onDataLoaded(this.initialUsers);
-		    	//this.setState({data: this.initialUsers});
 		    }
 		}
 
@@ -39,30 +31,11 @@ class App extends Component {
 		xhr.send();
 	}
 
-	updateState(nextState) {
-		this.setState(nextState);
-	}
-
-	sortData(key, order) {
-		let users = this.state.data.sort((a, b) => {
-			switch (key) {
-				case 'name':
-					return order ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
-				case 'age':
-					return order ? a.age - b.age : b.age - a.age;
-			}
-		});
-
-		this.setState({ data: users });
-	}
-
 	render() {
 		return (
 			<div className="container app">
-				<SearchBar data={this.initialUsers} onSearch={this.updateState.bind(this)} />
-
-				<ToolBar onSort={this.sortData.bind(this)} />
-
+				<SearchBar data={this.props.data} onSearch={this.props.onSearch} />
+				<ToolBar onSort={this.props.sortData} />
 				<UserList users={this.props.data} toMark={this.props.searchQuery} />
 			</div>
 		);
@@ -71,8 +44,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    data: state.data || [],
-    searchQuery: ''
+    data: state.data,
+    searchQuery: state.searchQuery
   }
 };
 
@@ -80,6 +53,19 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onDataLoaded: (data) => {
       dispatch({ type: actions.DATA_LOADED, data });
+    },
+    onSearch: (query) => {
+    	dispatch({ type: actions.SEARCH_QUERY_CHANGED, value: query });
+    },
+    sortData: (key, order) => {
+    	switch (key) {
+    		case 'name':
+					dispatch({ type: actions.SORT_BY_NAME, order });
+					break;
+				case 'age':
+					dispatch({ type: actions.SORT_BY_AGE, order });
+					break;
+    	}
     }
   }
 };
