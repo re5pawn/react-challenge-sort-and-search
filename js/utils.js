@@ -7,3 +7,11 @@ export const getUserImage = (imgName) => {
 		return `./images/${imgName}.svg`;
 	}
 }
+
+export const copy = (source) => {
+  if (Array.isArray(source)) {
+    return Object.assign({}, ...source);
+  } else {
+    return Object.assign({}, source);
+  }
+}

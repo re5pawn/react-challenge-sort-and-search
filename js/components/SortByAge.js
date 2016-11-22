@@ -1,29 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import * as Utils from '../utils';
 
-class SortByAge extends Component {
-		constructor(props) {
-			super(props);
+let order = false;
 
-			this.order = false;
-		}
+const SortByName = ({ onSort }) => {
+	const handleClick = (key) => {
+		order = !order;
+		onSort(key, order);
+	};
 
-		handleClick(key) {
-			this.order = !this.order;
-			this.props.onSort && this.props.onSort(key, this.order);
-		}
+	return (
+		<button className="btn btn-info btn-sm" type="button" onClick={() => handleClick('age')}>
+				<i className={Utils.concatClassNames(getOptClassName('glyphicon-sort-by-order', order), 'glyphicon')}></i>
+				Sort by age
+		</button>
+	);
+};
 
-		_getOptClassName(className) {
-			return !this.order ? className : `${className}-alt`;
-		}
+function getOptClassName(className, order) {
+	return !order ? className : `${className}-alt`;
+};
 
-		render() {
-			return (
-				<button className="btn btn-info btn-sm" type="button" onClick={this.handleClick.bind(this, 'age')}>
-						<i className={Utils.concatClassNames(this._getOptClassName('glyphicon-sort-by-order'), 'glyphicon')}></i> Sort by age
-				</button>
-			);
-		}
-}
-
-export default SortByAge;
+export default SortByName;

@@ -36,7 +36,7 @@ class App extends Component {
 			<div className="container app">
 				<SearchBar data={this.props.data} onSearch={this.props.onSearch} />
 				<ToolBar onSort={this.props.sortData} />
-				<UserList users={this.props.data} toMark={this.props.searchQuery} />
+				<UserList users={this.props.data} />
 			</div>
 		);
 	}
@@ -44,8 +44,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    data: state.data,
-    searchQuery: state.searchQuery
+    data: state.data
   }
 };
 

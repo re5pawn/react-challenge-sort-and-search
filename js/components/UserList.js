@@ -2,26 +2,19 @@ import React, { Component } from 'react';
 import UserData from './UserData';
 import ActiveUser from './ActiveUser';
 
+import { actions } from '../appReducer';
+import { connect } from 'react-redux';
+
 class UserList extends Component {
 		constructor(props) {
 			super(props);
-
-			this.state = { activeUser: {} };
-		}
-
-		componentWillReceiveProps(nextProps) {
-		  this.setState({ activeUser: nextProps.users[0] || {} });
-		}
-
-		onSelected(activeUser) {
-			this.setState( { activeUser });
 		}
 
 		render() {
 			return (
 				<div className="row">
 					<div className="col-md-3">
-						<ActiveUser user={this.state.activeUser} />
+						<ActiveUser user={this.props.activeUser} />
 					</div>
 
 					<div className="col-md-9">
@@ -37,7 +30,8 @@ class UserList extends Component {
 								</thead>
 								<tbody>
 									{this.props.users.map((u, i) => {
-										return <UserData key={u.id} user={u} toMark={this.props.toMark} onSelected={this.onSelected.bind(this)} />;
+										return <UserData key={u.id} user={u} toMark={this.props.toMark}
+														onSelected={this.props.selectActiveUser.bind(this, u.id)} />;
 									})}
 								</tbody>
 							</table>
@@ -48,4 +42,22 @@ class UserList extends Component {
 		}
 }
 
-export default UserList;
+const mapStateToProps = (state) => {
+  return {
+    activeUser: state.activeUser,
+    toMark: state.searchQuery
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectActiveUser: (id) => {
+      dispatch({ type: actions.SELECT_ACTIVE_USER, id });
+    }
+  }
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(UserList);
