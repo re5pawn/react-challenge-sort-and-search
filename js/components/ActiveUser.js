@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import * as Utils from '../utils';
+import { userPropType } from '../common-prop-types';
 
 const ActiveUser = ({user}) => {
 		let optClassName = Object.keys(user).length ? '' : 'hide';
@@ -21,5 +22,9 @@ const ActiveUser = ({user}) => {
 			</div>
 		);
 }
+
+ActiveUser.propTypes = {
+	user: userPropType
+};
 
 export default ActiveUser;

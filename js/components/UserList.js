@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import UserData from './UserData';
 import ActiveUser from './ActiveUser';
+import { userPropType } from '../common-prop-types';
 
 import { actions } from '../appReducer';
 import { connect } from 'react-redux';
@@ -41,6 +42,13 @@ class UserList extends Component {
 			);
 		}
 }
+
+UserList.propTypes = {
+  users: PropTypes.arrayOf(userPropType),
+  activeUser: userPropType,
+  toMark: PropTypes.string,
+  selectActiveUser: PropTypes.func
+};
 
 const mapStateToProps = (state) => {
   return {

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import * as Utils from '../utils';
 
 let order = false;
 
-const SortByName = ({ onSort }) => {
+const SortByAge = ({ onSort }) => {
 	const handleClick = (key) => {
 		order = !order;
 		onSort(key, order);
@@ -17,8 +17,12 @@ const SortByName = ({ onSort }) => {
 	);
 };
 
+SortByAge.propTypes = {
+	onSort: PropTypes.func.isRequired
+};
+
 function getOptClassName(className, order) {
 	return !order ? className : `${className}-alt`;
 };
 
-export default SortByName;
+export default SortByAge;

@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import SearchBar from './components/SearchBar';
 import UserList from './components/UserList';
 import ToolBar from './components/ToolBar';
+import { userPropType } from './common-prop-types';
 
 import { actions } from './appReducer';
 import { connect } from 'react-redux';
@@ -34,13 +35,21 @@ class App extends Component {
 	render() {
 		return (
 			<div className="container app">
-				<SearchBar data={this.props.data} onSearch={this.props.onSearch} />
+				<SearchBar onSearch={this.props.onSearch} />
 				<ToolBar onSort={this.props.sortData} />
 				<UserList users={this.props.data} />
 			</div>
 		);
 	}
 }
+
+App.propTypes = {
+  data: PropTypes.arrayOf(userPropType),
+  onDataLoaded: PropTypes.func,
+  onSearch: PropTypes.func,
+  sortData: PropTypes.func,
+  dataUrl: PropTypes.string
+};
 
 const mapStateToProps = (state) => {
   return {

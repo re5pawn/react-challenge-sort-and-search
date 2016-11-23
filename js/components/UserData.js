@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import * as Utils from '../utils';
+import { userPropType } from '../common-prop-types';
 
 const _getMarkedName = (name, mark) => {
 	let start = name.toLowerCase().indexOf(mark);
@@ -21,6 +22,12 @@ const UserData = ({ onSelected, user, toMark }) => {
 			<td>{user.phone}</td>
 		</tr>
 	);
+};
+
+UserData.propTypes = {
+	onSelected: PropTypes.func,
+	user: userPropType,
+	toMark: PropTypes.string
 };
 
 export default UserData;

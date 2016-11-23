@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
 class SearchBar extends Component {
@@ -50,5 +50,9 @@ class SearchBar extends Component {
 			);
 		}
 }
+
+SearchBar.propTypes = {
+	onSearch: PropTypes.func
+};
 
 export default SearchBar;

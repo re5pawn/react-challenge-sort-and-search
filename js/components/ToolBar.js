@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import SortByName from './SortByName';
 import SortByAge from './SortByAge';
 
@@ -13,6 +13,10 @@ const ToolBar = ({ onSort }) => {
 			</div>
 		</div>
 	);
+};
+
+ToolBar.propTypes = {
+	onSort: PropTypes.func.isRequired
 };
 
 export default ToolBar;

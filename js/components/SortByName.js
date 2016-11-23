@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import * as Utils from '../utils';
 
 let order = false;
@@ -15,6 +15,10 @@ const SortByName = ({ onSort }) => {
 				Sort by name
 		</button>
 	);
+};
+
+SortByName.propTypes = {
+	onSort: PropTypes.func.isRequired
 };
 
 function getOptClassName(className, order) {
