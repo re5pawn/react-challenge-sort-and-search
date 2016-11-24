@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+
 import SearchBar from './components/SearchBar';
 import UserList from './components/UserList';
 import ToolBar from './components/ToolBar';
 import { userPropType } from './common-prop-types';
-
 import { actions } from './appReducer';
-import { connect } from 'react-redux';
 
 class App extends Component {
 	constructor(props) {

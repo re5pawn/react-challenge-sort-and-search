@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+
 import SortByName from './SortByName';
 import SortByAge from './SortByAge';
 

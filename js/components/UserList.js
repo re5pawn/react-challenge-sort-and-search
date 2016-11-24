@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+
 import UserData from './UserData';
 import ActiveUser from './ActiveUser';
 import { userPropType } from '../common-prop-types';
-
 import { actions } from '../appReducer';
-import { connect } from 'react-redux';
 
 class UserList extends Component {
 		constructor(props) {
