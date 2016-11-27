@@ -27,14 +27,14 @@ export const appReducer = (state = initialState, action) => {
       }]);
 
     case actions.SORT_BY_NAME:
-      data = dataCache.slice().sort((a, b) => {
+      data = state.data.slice().sort((a, b) => {
         return action.order ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
       });
 
       return copy([state, { data, activeUser: data[0] }]);
 
     case actions.SORT_BY_AGE:
-      data = dataCache.slice().sort((a, b) => {
+      data = state.data.slice().sort((a, b) => {
         return action.order ? a.age - b.age : b.age - a.age;
       });
 
