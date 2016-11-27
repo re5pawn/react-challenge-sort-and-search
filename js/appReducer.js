@@ -13,10 +13,10 @@ export const appReducer = (state = initialState, action) => {
   let data = [];
 
   switch (action.type) {
-    case actions.DATA_LOADED:
+    case actions.UPDATE_DATA:
       return copy([state, { data: action.payload, activeUser: action.payload[0] }]);
 
-    case actions.SEARCH_QUERY_CHANGED:
+    case actions.SEARCH_BY_NAME:
       data = dataCache
         .filter(el => el.name.toLowerCase().indexOf(action.payload) >= 0);
 
@@ -56,7 +56,7 @@ export const appReducer = (state = initialState, action) => {
 
 export const handleLoadedDataMiddleware = state => next => action => {
   // save data only for a 1st time
-  if (action.type === actions.DATA_LOADED && !dataCache.length) {
+  if (action.type === actions.UPDATE_DATA && !dataCache.length) {
     dataCache = action.payload;
   }
   next(action);

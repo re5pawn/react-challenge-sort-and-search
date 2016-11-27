@@ -1,21 +1,21 @@
 export const actions = {
-  DATA_LOADED: 'DATA_LOADED',
-  SEARCH_QUERY_CHANGED: 'SEARCH_QUERY_CHANGED',
+  UPDATE_DATA: 'UPDATE_DATA',
+  SEARCH_BY_NAME: 'SEARCH_BY_NAME',
   SORT_BY_NAME: 'SORT_BY_NAME',
   SORT_BY_AGE: 'SORT_BY_AGE',
   SELECT_ACTIVE_USER: 'SELECT_ACTIVE_USER'
 };
 
-export const dataLoaded = payload => {
+export const updateData = payload => {
   return {
-    type: actions.DATA_LOADED,
+    type: actions.UPDATE_DATA,
     payload
   };
 };
 
-export const searchQueryChanged = payload => {
+export const searchByName = payload => {
   return {
-    type: actions.SEARCH_QUERY_CHANGED,
+    type: actions.SEARCH_BY_NAME,
     payload
   };
 };

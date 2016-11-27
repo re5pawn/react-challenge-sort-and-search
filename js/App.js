@@ -63,10 +63,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onDataLoaded: (data) => {
-      dispatch(actions.dataLoaded(data));
+      dispatch(actions.updateData(data));
     },
     onSearch: (query) => {
-      dispatch(actions.searchQueryChanged(query));
+      dispatch(actions.searchByName(query));
     },
     sortData: (key, order) => {
       dispatch(actions.sortBy(key, order));
