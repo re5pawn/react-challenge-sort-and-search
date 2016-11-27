@@ -1,12 +1,5 @@
 import { copy } from './utils';
-
-export const actions = {
-  DATA_LOADED: 'DATA_LOADED',
-  SEARCH_QUERY_CHANGED: 'SEARCH_QUERY_CHANGED',
-  SORT_BY_NAME: 'SORT_BY_NAME',
-  SORT_BY_AGE: 'SORT_BY_AGE',
-  SELECT_ACTIVE_USER: 'SELECT_ACTIVE_USER'
-};
+import { actions } from './action-creators';
 
 let initialState = {
   data: [],

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import UserData from './UserData';
 import ActiveUser from './ActiveUser';
 import { userPropType } from '../common-prop-types';
-import { actions } from '../appReducer';
+import { selectActiveUser } from '../action-creators';
 
 class UserList extends Component {
 		constructor(props) {
@@ -60,7 +60,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     selectActiveUser: (id) => {
-      dispatch({ type: actions.SELECT_ACTIVE_USER, id });
+      dispatch(selectActiveUser(id));
     }
   }
 };

@@ -5,7 +5,7 @@ import SearchBar from './components/SearchBar';
 import UserList from './components/UserList';
 import ToolBar from './components/ToolBar';
 import { userPropType } from './common-prop-types';
-import { actions } from './appReducer';
+import * as actions from './action-creators';
 
 class App extends Component {
 	constructor(props) {
@@ -60,20 +60,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onDataLoaded: (data) => {
-      dispatch({ type: actions.DATA_LOADED, data });
+      dispatch(actions.dataLoaded(data));
     },
     onSearch: (query) => {
-    	dispatch({ type: actions.SEARCH_QUERY_CHANGED, value: query });
+    	dispatch(actions.searchQueryChanged(query));
     },
     sortData: (key, order) => {
-    	switch (key) {
-    		case 'name':
-					dispatch({ type: actions.SORT_BY_NAME, order });
-					break;
-				case 'age':
-					dispatch({ type: actions.SORT_BY_AGE, order });
-					break;
-    	}
+    	dispatch(actions.sortBy(key, order));
     }
   }
 };
