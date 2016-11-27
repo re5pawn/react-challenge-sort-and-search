@@ -6,32 +6,32 @@ export const actions = {
   SELECT_ACTIVE_USER: 'SELECT_ACTIVE_USER'
 };
 
-export const dataLoaded = data => {
+export const dataLoaded = payload => {
   return {
     type: actions.DATA_LOADED,
-    data
+    payload
   };
 };
 
-export const searchQueryChanged = value => {
+export const searchQueryChanged = payload => {
   return {
     type: actions.SEARCH_QUERY_CHANGED,
-    value
+    payload
   };
 };
 
 export const sortBy = (field, order) => {
   switch (field) {
     case 'name':
-      return { type: actions.SORT_BY_NAME, order };
+      return { type: actions.SORT_BY_NAME, payload: { order } };
     case 'age':
-      return { type: actions.SORT_BY_AGE, order };
+      return { type: actions.SORT_BY_AGE, payload: { order } };
   }
 };
 
 export const selectActiveUser = id => {
   return {
     type: actions.SELECT_ACTIVE_USER,
-    id
+    payload: { id }
   };
 };
