@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+import createLogger from 'redux-logger';
 
-import { data, searchQuery, activeUser, handleLoadedDataMiddleware } from './appReducer';
+import reducers from './reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(combineReducers({ data, searchQuery, activeUser }), composeEnhancers(applyMiddleware(handleLoadedDataMiddleware)));
+const store = createStore(
+  reducers,
+  composeEnhancers(applyMiddleware(createLogger()))
+);
 
 ReactDOM.render(
   <Provider store={store}>
