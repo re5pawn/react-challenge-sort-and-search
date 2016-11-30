@@ -9,45 +9,50 @@ let initialState = {
 
 let dataCache = [];
 
-export const appReducer = (state = initialState, action) => {
-  let data = [];
+export const activeUser = (state = {}, action) => {
+  switch (action.type) {
+    case actions.SELECT_ACTIVE_USER:
+      return dataCache.filter(d => d.id === action.payload.id)[0];
 
+    case actions.UPDATE_DATA:
+      return action.payload[0];
+
+    default:
+      return state;
+  }
+};
+
+export const searchQuery = (state = '', action) => {
+  switch (action.type) {
+    case actions.SEARCH_BY_NAME:
+      return action.payload;
+
+    default:
+      return state;
+  }
+};
+
+export const data = (state = [], action) => {
   switch (action.type) {
     case actions.UPDATE_DATA:
-      return copy([state, { data: action.payload, activeUser: action.payload[0] }]);
-
-    case actions.SEARCH_BY_NAME:
-      data = dataCache
-        .filter(el => el.name.toLowerCase().indexOf(action.payload) >= 0);
-
-      return copy([state, {
-        searchQuery: action.payload,
-        data, activeUser:
-        data[0] || state.activeUser
-      }]);
+      return [...action.payload];
 
     case actions.SORT_BY_NAME:
-      data = state.data.slice().sort((a, b) => {
+      return [...state].sort((a, b) => {
         return action.payload.order
           ? a.name.localeCompare(b.name)
           : b.name.localeCompare(a.name);
       });
 
-      return copy([state, { data, activeUser: data[0] }]);
-
     case actions.SORT_BY_AGE:
-      data = state.data.slice().sort((a, b) => {
+      return [...state].sort((a, b) => {
         return action.payload.order ? a.age - b.age : b.age - a.age;
       });
 
-      return copy([state, { data, activeUser: data[0] }]);
-
-    case actions.SELECT_ACTIVE_USER:
-      let activeUser = action.payload.id
-        ? dataCache.filter(d => d.id === action.payload.id)[0]
-        : (state.data[0] || {});
-
-      return copy([state, { activeUser }]);
+    case actions.SEARCH_BY_NAME:
+      return dataCache.filter(el => {
+        return el.name.toLowerCase().indexOf(action.payload) >= 0;
+      });
 
     default:
       return state;
