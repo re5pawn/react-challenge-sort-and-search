@@ -19,6 +19,7 @@
     "browser-sync": "^2.11.1",
     "dreamjs": "^0.1.5",
     "eslint-plugin-react": "^4.2.3",
+    "flow-bin": "^0.36.0",
     "gulp": "3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-filenames": "^2.0.0",
