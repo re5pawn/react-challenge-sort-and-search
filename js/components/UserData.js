@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import * as Utils from '../utils';
+import { getUserImage } from '../utils';
 import { userPropType } from '../common-prop-types';
 
 const _getMarkedName = (name, mark) => {
@@ -17,7 +17,7 @@ const _getMarkedName = (name, mark) => {
 const UserData = ({ onSelected, user, toMark }) => {
 	return (
 		<tr className="user-data-item" onClick={() => onSelected(user)}>
-			<td><img src={Utils.getUserImage(user.image)} alt="User Image" className="user-image" /></td>
+			<td><img src={getUserImage(user.image)} alt="User Image" className="user-image" /></td>
 			<td>{_getMarkedName(user.name, toMark)}</td>
 			<td>{user.age}</td>
 			<td>{user.phone}</td>

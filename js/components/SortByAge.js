@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import * as Utils from '../utils';
+import { concatClassNames } from '../utils';
 
 let order = false;
 
@@ -12,7 +12,7 @@ const SortByAge = ({ onSort }) => {
 
 	return (
 		<button className="btn btn-info btn-sm" type="button" onClick={() => handleClick('age')}>
-				<i className={Utils.concatClassNames(getOptClassName('glyphicon-sort-by-order', order), 'glyphicon')}></i>
+				<i className={concatClassNames(getOptClassName('glyphicon-sort-by-order', order), 'glyphicon')}></i>
 				Sort by age
 		</button>
 	);

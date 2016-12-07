@@ -6,6 +6,7 @@ import UserList from './components/UserList';
 import ToolBar from './components/ToolBar';
 import { userPropType } from './common-prop-types';
 import * as actions from './action-creators';
+import { filterByName } from './selectors';
 
 class App extends Component {
   constructor(props) {
@@ -54,21 +55,21 @@ App.propTypes = {
   dataUrl: PropTypes.string
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    data: state.data
+    data: filterByName(state.users, state.searchQuery)
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onDataLoaded: (data) => {
+    onDataLoaded(data) {
       dispatch(actions.updateData(data));
     },
-    onSearch: (query) => {
+    onSearch(query) {
       dispatch(actions.searchByName(query));
     },
-    sortData: (key, order) => {
+    sortData(key, order) {
       dispatch(actions.sortBy(key, order));
     }
   }
