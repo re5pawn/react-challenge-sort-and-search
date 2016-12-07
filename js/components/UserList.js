@@ -14,7 +14,8 @@ class UserList extends Component {
 		render() {
 			return (
 				<div className="row">
-					<div className="col-md-3">
+					<div className="col-md-3"
+               style={{position: '-webkit-sticky', position: 'sticky', top: '15px'}}>
 						<ActiveUser user={this.props.activeUser} />
 					</div>
 
