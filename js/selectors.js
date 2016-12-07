@@ -7,5 +7,5 @@ export const getActiveUser = (users, id) => {
 };
 
 export const filterByName = (data, term) => {
-  return data.filter(d => d.name.toLowerCase().includes(term));
+  return data.filter(d => d.name.toLowerCase().indexOf(term) >= 0);
 };
